@@ -1,16 +1,29 @@
-# uts_pemob_6
+# UTS Pemrograman Mobile
 
-Aplikasi quiz pilihan ganda di mana pengguna dapat memasukkan nama, menjawab serangkaian pertanyaan dan melihat skor akhir dari nama pengguna tersebut.
+![title.png](assets/images/title.png)
 
-## Getting Started
+## Dibuat Oleh
+Nama : Bintang Khalik Muhammad 
 
-This project is a starting point for a Flutter application.
+NIM : 231401075 
 
-A few resources to get you started if this is your first Flutter project:
+LAB : 6
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Deskripsi Aplikasi
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Animeku, is... adalah aplikasi quiz pilihan berganda dimana pengetahuan player mengenai hal-hal anime akan diuji. Player harus dapat membedakan anime-anime dari synopsis yang diberikan. 
+
+Terdapat juga beberapa fungsi hint yang dapat dibeli untuk membantu player dengan pengetahuan anime yang rendah, contohnya adalah sebagai berikut.
+
+50/50 untuk menghilangkan 2 jawaban yang salah, \
+EP untuk menampilkan jumlah episode anime tersebut, \
+Year untuk menampilkan tahun terbit anime tersebut.
+
+## Mockup Aplikasi
+
+![mockup_aplikasi.png](assets/images/mockup_aplikasi.png)
+
+
+## Credit
+
+Data Anime : [Kaggle](https://www.kaggle.com/datasets/dbdmobile/myanimelist-dataset/data)
