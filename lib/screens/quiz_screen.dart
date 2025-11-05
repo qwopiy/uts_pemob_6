@@ -1,19 +1,68 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uts_pemob_6/widgets/answer_overlay.dart';
 import 'package:uts_pemob_6/widgets/health_bar.dart';
 
+import '../provider/app_state_provider.dart';
 import '../widgets/app_scaffold.dart';
 import '../widgets/top_bar.dart';
 
-class QuizScreen extends StatelessWidget{
-  final int health = 3;
+class QuizScreen extends StatefulWidget{
+  QuizScreen({super.key, required this.synopsis, required this.options});
   final String synopsis;
   final List<String> options;
-  const QuizScreen({super.key, required this.synopsis, required this.options});
+
+  @override
+  State<QuizScreen> createState() => _QuizScreenState();
+}
+
+class _QuizScreenState extends State<QuizScreen> {
+  AppStateProvider? _provider;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final prev = _provider;
+    final next = Provider.of<AppStateProvider>(context);
+    _provider = next;
+    // avoid adding multiple listeners
+    if (prev != next) {
+      prev?.removeListener(_onProviderChanged);
+      next.addListener(_onProviderChanged);
+    }
+  }
+
+  @override
+  void dispose() {
+    _provider?.removeListener(_onProviderChanged);
+    super.dispose();
+  }
+
+  void _onProviderChanged() {
+    if (_provider!.overlayRequested) {
+      // show the overlay dialog
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => const AnswerOverlay(),
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    int health = Provider.of<AppStateProvider>(context).health;
+    String synopsis = widget.synopsis;
+    List<String> options = widget.options;
+
     return AppScaffold(
       appBar: TopBar(
         money: 0,
@@ -43,7 +92,7 @@ class QuizScreen extends StatelessWidget{
                 child: Scrollbar(
                     child: SingleChildScrollView(
                       child: Text(
-                        'To the average person, psychic abilities might seem a blessing; for Kusuo Saiki, however, this could not be further from the truth. Gifted with a wide assortment of supernatural abilities ranging from telepathy to x-ray vision, he finds this so-called blessing to be nothing but a curse. As all the inconveniences his powers cause constantly pile up, all Kusuo aims for is an ordinary, hassle-free life—a life where ignorance is bliss. Unfortunately, the life of a psychic is far from quiet. Though Kusuo tries to stay out of the spotlight by keeping his powers a secret from his classmates, he ends up inadvertently attracting the attention of many odd characters, such as the empty-headed Riki Nendou and the delusional Shun Kaidou. Forced to deal with the craziness of the people around him, Kusuo comes to learn that the ordinary life he has been striving for is a lot more difficult to achieve than expected.',
+                        synopsis,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontFamily: 'Komika',
@@ -92,6 +141,7 @@ class QuizScreen extends StatelessWidget{
                                 fontFamily: 'Komika',
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
+                                color: Colors.black
                               ),
                             ),
                           ),
@@ -138,6 +188,7 @@ class QuizScreen extends StatelessWidget{
                                 fontFamily: 'Komika',
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
+                                color: Colors.black
                               ),
                             ),
                           ),
@@ -201,82 +252,93 @@ class QuizScreen extends StatelessWidget{
                             child: SizedBox(
                               width: buttonWidth,
                               child: ElevatedButton(
-                                onPressed: () {},
-                                style: ButtonStyle(
-                                  backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
-                                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                  onPressed: () {
+                                    Provider.of<AppStateProvider>(context, listen: false).checkAnswer(0);
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
+                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                child: Text(
-                                  'Answer 1',
-                                  style: TextStyle(
-                                    fontFamily: 'Komika',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                                  child: Text(
+                                      options[0],
+                                      style: TextStyle(
+                                          fontFamily: 'Komika',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black
+                                      ),
+                                    ),
+                                  )
                               ),
                             ),
-                          ),
                           SizedBox(height: 10),
                           Expanded(
                             child: SizedBox(
                               width: buttonWidth,
                               child: ElevatedButton(
-                                onPressed: () {},
-                                style: ButtonStyle(
-                                  backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
-                                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                  onPressed: () {
+                                    Provider.of<AppStateProvider>(context, listen: false).checkAnswer(1);
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
+                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                child: Text(
-                                  'Answer 2',
-                                  style: TextStyle(
-                                    fontFamily: 'Komika',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                                  child: Text(
+                                      options[1],
+                                      style: TextStyle(
+                                          fontFamily: 'Komika',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black
+                                      ),
+                                    ),
+                                  )
                               ),
                             ),
-                          ),
                           SizedBox(height: 10),
                           Expanded(
                             child: SizedBox(
                               width: buttonWidth,
                               child: ElevatedButton(
-                                onPressed: () {},
-                                style: ButtonStyle(
-                                  backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
-                                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                  onPressed: () {
+                                    Provider.of<AppStateProvider>(context, listen: false).checkAnswer(2);
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
+                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                child: Text(
-                                  'Answer 3',
-                                  style: TextStyle(
-                                    fontFamily: 'Komika',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                                  child: Text(
+                                      options[2],
+                                      style: TextStyle(
+                                          fontFamily: 'Komika',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black
+                                      ),
+                                    ),
+                                  )
                               ),
                             ),
-                          ),
                           SizedBox(height: 10),
                           Expanded(
                             child: SizedBox(
                               width: buttonWidth,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Provider.of<AppStateProvider>(context, listen: false).checkAnswer(3);
+                                },
                                 style: ButtonStyle(
                                   backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
                                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -286,16 +348,17 @@ class QuizScreen extends StatelessWidget{
                                   ),
                                 ),
                                 child: Text(
-                                  'Answer 4',
-                                  style: TextStyle(
-                                    fontFamily: 'Komika',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    options[3],
+                                    style: TextStyle(
+                                      fontFamily: 'Komika',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black
+                                    ),
                                   ),
-                                ),
+                                )
                               ),
                             ),
-                          ),
                         ],
                       ),
                     );

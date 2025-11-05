@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uts_pemob_6/widgets/app_scaffold.dart';
 
 import '../widgets/top_bar.dart';
@@ -47,9 +48,7 @@ class HomeScreen extends StatelessWidget {
                             Size(screenWidth * 0.5, screenHeight * 0.09),
                           ),
                         ),
-                        onPressed: () {
-
-                        },
+                        onPressed: () => GoRouter.of(context).go('/quiz'),
                         child: Text(
                           'Play',
                           style: TextStyle(
