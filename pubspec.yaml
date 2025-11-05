@@ -54,6 +54,7 @@ flutter:
   assets:
     - assets/data/anime_list.json
     - assets/images/title.png
+    - assets/images/gear_icon.png
 
   fonts:
     - family: Komika
