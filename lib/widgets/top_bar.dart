@@ -14,6 +14,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Color(0xFFFFFDF6),
       automaticallyImplyLeading: false,
       titleSpacing: 0,
       title: SizedBox(
@@ -27,25 +28,40 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget{
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (money != null) Text('${money}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                    if (money != null) const SizedBox(width: 8),
-                    const Icon(Icons.monetization_on, size: 20),
+                    if (money != null) Text(
+                      '${money}',
+                      style: const TextStyle(
+                        fontFamily: 'Komika',
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600
+                      )
+                    ),
+                    if (money != null)
+                      const Icon(
+                        Icons.circle,
+                        size: 32,
+                        color: Color(0xFFFFC943)
+                      ),
                   ],
                 ),
               ),
             ),
-            Center(child: healthBar ?? const SizedBox.shrink()),
+            Align(
+              alignment: Alignment.center,
+              child: healthBar ?? const SizedBox.shrink()
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                icon: Image.asset('assets/images/gear_icon.png'),
+                onPressed: () {
+                  // Handle settings button press
+                },
+              ),
+            ),
           ],
         ),
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {
-            // Handle settings button press
-          },
-        ),
-      ],
     );
   }
 
