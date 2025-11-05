@@ -27,3 +27,5 @@ Year untuk menampilkan tahun terbit anime tersebut.
 ## Credit
 
 Data Anime : [Kaggle](https://www.kaggle.com/datasets/dbdmobile/myanimelist-dataset/data)
+
+Font : [Komika](https://www.dafont.com/komika-text.font?l[]=10&l[]=1)
