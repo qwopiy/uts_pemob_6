@@ -21,7 +21,7 @@ Year untuk menampilkan tahun terbit anime tersebut.
 
 ## Mockup Aplikasi
 
-![mockup_aplikasi.png](assets/images/mockup_aplikasi.png)
+![mockup.png](assets/images/mockup.png)
 
 
 ## Credit
