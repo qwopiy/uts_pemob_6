@@ -29,7 +29,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget{
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (money != null) Text(
-                      '${money}',
+                      '$money',
                       style: const TextStyle(
                         fontFamily: 'Komika',
                         fontSize: 32,
