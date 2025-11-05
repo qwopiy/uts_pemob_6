@@ -1,8 +1,8 @@
 class Anime {
-  final int id;
+  final String id;
   final String name;
   final String synopsis;
-  final int episodes;
+  final String episodes;
   final String imageURL;
 
   Anime({
