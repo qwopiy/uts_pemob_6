@@ -52,6 +52,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - assets/data/anime_list.json
     - assets/images/title.png
 
   # The following line ensures that the Material Icons font is
