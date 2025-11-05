@@ -4,22 +4,14 @@ class Anime {
   final String synopsis;
   final String episodes;
   final String imageURL;
+  final String aired;
 
-  Anime({
+  const Anime({
     required this.id,
     required this.name,
     required this.synopsis,
     required this.episodes,
-    required this.imageURL
+    required this.imageURL,
+    required this.aired
   });
-
-  factory Anime.fromJson(Map<String, dynamic> json) {
-    return Anime(
-      id: json['anime_id'],
-      name: json['name'],
-      synopsis: json['synopsis'],
-      episodes: json['episodes'],
-      imageURL: json['image_url']
-    );
-  }
 }
