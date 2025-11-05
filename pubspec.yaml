@@ -55,6 +55,19 @@ flutter:
     - assets/data/anime_list.json
     - assets/images/title.png
 
+  fonts:
+    - family: Komika
+      fonts:
+        - asset: assets/fonts/KOMTXT__.ttf
+        - asset: assets/fonts/KOMTXTB_.ttf
+          weight: 700
+        - asset: assets/fonts/KOMTXTI_.ttf
+          style: italic
+        - asset: assets/fonts/KOMTXTBI.ttf
+          weight: 700
+          style: italic
+
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
