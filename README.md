@@ -15,7 +15,6 @@ Animeku, is... adalah aplikasi quiz pilihan berganda dimana pengetahuan player m
 
 Terdapat juga beberapa fungsi hint yang dapat dibeli untuk membantu player dengan pengetahuan anime yang rendah, contohnya adalah sebagai berikut.
 
-50/50 untuk menghilangkan 2 jawaban yang salah, \
 EP untuk menampilkan jumlah episode anime tersebut, \
 Year untuk menampilkan tahun terbit anime tersebut.
 
