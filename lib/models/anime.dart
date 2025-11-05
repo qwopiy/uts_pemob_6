@@ -12,14 +12,4 @@ class Anime {
     required this.episodes,
     required this.imageURL
   });
-
-  factory Anime.fromMap(Map<String, dynamic> map) {
-    return Anime(
-      id: map['anime_id'],
-      name: map['name'],
-      synopsis: map['synopsis'],
-      episodes: map['episodes'],
-      imageURL: map['image_url']
-    );
-  }
 }
