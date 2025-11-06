@@ -47,6 +47,7 @@ class AnswerScreen extends StatelessWidget{
                   width: 160,
                   child: ElevatedButton(
                     onPressed: () {
+                      provider.updateUser();
                       if (provider.health > 0)
                         GoRouter.of(context).go('/quiz');
                       else
