@@ -3,7 +3,8 @@
 ![title.png](assets/images/title.png)
 
 ## Dibuat Oleh
-Nama : Bintang Khalik Muhammad 
+Nama : 
+Bintang Khalik Muhammad 
 
 NIM : 231401075 
 
@@ -19,6 +20,12 @@ Terdapat juga beberapa fungsi skip jika merasa kesusahan, tapi harus bayar 2 koi
 
 ![mockup.png](assets/images/mockup.png)
 
+## Screenshot Aplikasi
+![Screenshot 2025-11-06 101647.png](assets/images/Screenshot%202025-11-06%20101647.png)
+![Screenshot 2025-11-06 103343.png](assets/images/Screenshot%202025-11-06%20103343.png)
+![Screenshot 2025-11-06 103408.png](assets/images/Screenshot%202025-11-06%20103408.png)
+![Screenshot 2025-11-06 103418.png](assets/images/Screenshot%202025-11-06%20103418.png)
+![Screenshot 2025-11-06 103442.png](assets/images/Screenshot%202025-11-06%20103442.png)
 
 ## Credit
 
