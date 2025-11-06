@@ -32,11 +32,6 @@ GoRouter router = GoRouter(
       builder: (context, state) => const AnswerScreen(),
     ),
 
-    // GoRoute(
-    //   path: AppRoutes.stats,
-    //   builder: (context, state) => const StatsScreen(),
-    // ),
-
      GoRoute(
        path: AppRoutes.result,
        builder: (context, state) => const ResultScreen(),

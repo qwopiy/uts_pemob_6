@@ -6,7 +6,13 @@ import 'package:uts_pemob_6/data/anime_list.dart';
 import '../models/user.dart';
 
 class AppStateProvider extends ChangeNotifier {
-  late User user;
+  late User user = User(
+    name: 'User',
+    correct: 0,
+    wrong: 0,
+    coins: 0,
+    totalCoinsUsed: 0,
+  );
   late int _health;
   late int _coins = 0;
   late int _totalCoinsUsed = 0;
@@ -17,15 +23,10 @@ class AppStateProvider extends ChangeNotifier {
   late bool _answeredCorrectly;
   String imageToShow = '';
   String message = '';
+  String ep = '';
+  String year = '';
 
   AppStateProvider() {
-    User(
-      name: 'User',
-      correct: 0,
-      wrong: 0,
-      coins: 0,
-      totalCoinsUsed: 0,
-    );
     resetGame();
   }
 
@@ -131,6 +132,13 @@ class AppStateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void skip() {
+    if (useCoin(2)) {
+      ep = getAnimeEpisodes(_currentAnimeIndex);
+      notifyListeners();
+    }
+  }
+
   void resetGame() {
     _health = 3;
     _currentAnimeIndex = 0;
@@ -142,14 +150,16 @@ class AppStateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void useCoin(int amount, int price) {
-    if (_coins < price)
-      return;
-    if (_coins >= amount) {
-      _coins -= amount;
-      _totalCoinsUsed += amount;
-      notifyListeners();
+  bool useCoin(int price) {
+    if (_coins < price) {
+      return false;
     }
+    if (_coins >= price) {
+      _coins -= price;
+      _totalCoinsUsed += price;
+      // notifyListeners();
+    }
+    return true;
   }
 
   void updateUser() {
