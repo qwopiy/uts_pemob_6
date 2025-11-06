@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:uts_pemob_6/widgets/answer_overlay.dart';
+import 'package:uts_pemob_6/screens/answer_screen.dart';
 import 'package:uts_pemob_6/widgets/health_bar.dart';
 
 import '../provider/app_state_provider.dart';
@@ -10,9 +11,7 @@ import '../widgets/app_scaffold.dart';
 import '../widgets/top_bar.dart';
 
 class QuizScreen extends StatefulWidget{
-  QuizScreen({super.key, required this.synopsis, required this.options});
-  final String synopsis;
-  final List<String> options;
+  QuizScreen({super.key});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -25,47 +24,16 @@ class _QuizScreenState extends State<QuizScreen> {
     super.initState();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final prev = _provider;
-    final next = Provider.of<AppStateProvider>(context);
-    _provider = next;
-    // avoid adding multiple listeners
-    if (prev != next) {
-      prev?.removeListener(_onProviderChanged);
-      next.addListener(_onProviderChanged);
-    }
-  }
-
-  @override
-  void dispose() {
-    _provider?.removeListener(_onProviderChanged);
-    super.dispose();
-  }
-
-  void _onProviderChanged() {
-    if (_provider!.overlayRequested) {
-      // show the overlay dialog
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => const AnswerOverlay(),
-        );
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     int health = Provider.of<AppStateProvider>(context).health;
-    String synopsis = widget.synopsis;
-    List<String> options = widget.options;
+    List<String> options = Provider.of<AppStateProvider>(context).buildOptions();
+    String synopsis = AppStateProvider.getAnimeSynopsis(Provider.of<AppStateProvider>(context).currentAnimeIndex);
 
     return AppScaffold(
       appBar: TopBar(
-        money: 0,
+        money: Provider.of<AppStateProvider>(context).coins,
         healthBar: HealthBar(health: health),
       ),
       body: Wrap(
@@ -254,6 +222,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               child: ElevatedButton(
                                   onPressed: () {
                                     Provider.of<AppStateProvider>(context, listen: false).checkAnswer(0);
+                                    GoRouter.of(context).go('/answer');
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
@@ -265,6 +234,8 @@ class _QuizScreenState extends State<QuizScreen> {
                                   ),
                                   child: Text(
                                       options[0],
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           fontFamily: 'Komika',
                                           fontSize: 16,
@@ -282,6 +253,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               child: ElevatedButton(
                                   onPressed: () {
                                     Provider.of<AppStateProvider>(context, listen: false).checkAnswer(1);
+                                    GoRouter.of(context).go('/answer');
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
@@ -292,7 +264,9 @@ class _QuizScreenState extends State<QuizScreen> {
                                     ),
                                   ),
                                   child: Text(
-                                      options[1],
+                                    options[1],
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           fontFamily: 'Komika',
                                           fontSize: 16,
@@ -310,6 +284,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               child: ElevatedButton(
                                   onPressed: () {
                                     Provider.of<AppStateProvider>(context, listen: false).checkAnswer(2);
+                                    GoRouter.of(context).go('/answer');
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
@@ -320,12 +295,14 @@ class _QuizScreenState extends State<QuizScreen> {
                                     ),
                                   ),
                                   child: Text(
-                                      options[2],
+                                    options[2],
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          fontFamily: 'Komika',
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black
+                                        fontFamily: 'Komika',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black
                                       ),
                                     ),
                                   )
@@ -338,6 +315,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   Provider.of<AppStateProvider>(context, listen: false).checkAnswer(3);
+                                  GoRouter.of(context).go('/answer');
                                 },
                                 style: ButtonStyle(
                                   backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),
@@ -348,7 +326,9 @@ class _QuizScreenState extends State<QuizScreen> {
                                   ),
                                 ),
                                 child: Text(
-                                    options[3],
+                                  options[3],
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontFamily: 'Komika',
                                       fontSize: 16,

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/app_state_provider.dart';
 
-class AnswerOverlay extends StatelessWidget{
-  const AnswerOverlay({super.key});
+class AnswerScreen extends StatelessWidget{
+  const AnswerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppStateProvider>(context, listen: false);
     String imageURL = provider.imageToShow;
     return Container(
-      color: Colors.black54,
+      color:Color(0xFFFFFDF6),
       child: Center(
         child: Container(
           color: Color(0xFFFFFDF6),
@@ -44,9 +45,7 @@ class AnswerOverlay extends StatelessWidget{
                   width: 160,
                   child: ElevatedButton(
                     onPressed: () {
-                      // close the overlay and inform provider
-                      provider.clearOverlayRequest();
-                      Navigator.of(context).pop();
+                      GoRouter.of(context).go('/quiz');
                     },
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),

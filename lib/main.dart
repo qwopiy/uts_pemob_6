@@ -12,19 +12,7 @@ class AnimeKuis extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   title: 'Anime Kuis',
-    //   debugShowCheckedModeBanner: false,
-    //   home: QuizScreen(
-    //     synopsis: AppStateProvider.getAnimeSynopsis(0),
-    //     options: [
-    //       AppStateProvider.getAnimeName(1),
-    //       AppStateProvider.getAnimeName(2),
-    //       AppStateProvider.getAnimeName(3),
-    //       AppStateProvider.getAnimeName(4),
-    //     ],
-    //   ),
-    // );
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
