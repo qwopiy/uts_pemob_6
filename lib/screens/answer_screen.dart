@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:uts_pemob_6/widgets/app_scaffold.dart';
 
 import '../provider/app_state_provider.dart';
 
@@ -11,9 +12,10 @@ class AnswerScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     final provider = Provider.of<AppStateProvider>(context, listen: false);
     String imageURL = provider.imageToShow;
-    return Container(
-      color:Color(0xFFFFFDF6),
-      child: Center(
+    String message = provider.message;
+
+    return AppScaffold(
+      body: Center(
         child: Container(
           color: Color(0xFFFFFDF6),
           padding: EdgeInsets.all(20),
@@ -23,14 +25,14 @@ class AnswerScreen extends StatelessWidget{
               children: [
                 Image.network(
                   imageURL,
-                  width: 200,
-                  height: 200,
+                  width: 300,
+                  height: 300,
                 ),
 
                 SizedBox(height: 20),
 
                 Text(
-                  'PlaceHolder',
+                  message,
                   style: TextStyle(
                     fontFamily: 'Komika',
                     fontSize: 16,
@@ -45,7 +47,10 @@ class AnswerScreen extends StatelessWidget{
                   width: 160,
                   child: ElevatedButton(
                     onPressed: () {
-                      GoRouter.of(context).go('/quiz');
+                      if (provider.health > 0)
+                        GoRouter.of(context).go('/quiz');
+                      else
+                        GoRouter.of(context).go('/result');
                     },
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all<Color>(Color(0xFFA0C878)),

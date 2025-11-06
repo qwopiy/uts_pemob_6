@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uts_pemob_6/widgets/health_bar.dart';
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget{
@@ -55,7 +56,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget{
               child: IconButton(
                 icon: Image.asset('assets/images/gear_icon.png'),
                 onPressed: () {
-                  // Handle settings button press
+                  GoRouter.of(context).go('/settings');
                 },
               ),
             ),
