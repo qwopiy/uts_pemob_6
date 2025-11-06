@@ -13,10 +13,7 @@ LAB : 6
 
 Animeku, is... adalah aplikasi quiz pilihan berganda dimana pengetahuan player mengenai hal-hal anime akan diuji. Player harus dapat membedakan anime-anime dari synopsis yang diberikan. 
 
-Terdapat juga beberapa fungsi hint yang dapat dibeli untuk membantu player dengan pengetahuan anime yang rendah, contohnya adalah sebagai berikut.
-
-EP untuk menampilkan jumlah episode anime tersebut, \
-Year untuk menampilkan tahun terbit anime tersebut.
+Terdapat juga beberapa fungsi skip jika merasa kesusahan, tapi harus bayar 2 koin.
 
 ## Mockup Aplikasi
 
